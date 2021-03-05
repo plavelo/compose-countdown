@@ -10,4 +10,6 @@
       the License.
       -->
     <string name="app_name">Countdown</string>
+    <string name="about">🐱 Countdown / developed by plavelo</string>
+    <string name="reset">Reset</string>
 </resources>
