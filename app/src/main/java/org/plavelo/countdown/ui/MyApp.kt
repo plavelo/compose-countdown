@@ -56,7 +56,7 @@ import org.plavelo.countdown.R
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
         val scope = rememberCoroutineScope()
-        val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed)
+        val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Revealed)
         val viewModel: MyViewModel = viewModel()
         BackdropScaffold(
             scaffoldState = scaffoldState,
