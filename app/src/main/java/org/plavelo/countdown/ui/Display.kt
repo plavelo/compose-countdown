@@ -32,7 +32,11 @@ val TIMER_LABEL_HEIGHT = 160.dp
 
 @Preview
 @Composable
-fun Display(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) {
+fun Display(
+    hours: Int = 0,
+    minutes: Int = 0,
+    seconds: Int = 0,
+) {
     Row(
         modifier = Modifier
             .padding(top = 24.dp, bottom = 8.dp)
@@ -47,7 +51,10 @@ fun Display(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) {
 }
 
 @Composable
-private fun Cell(value: Int, unit: String) {
+private fun Cell(
+    value: Int,
+    unit: String,
+) {
     Row(
         verticalAlignment = Alignment.Bottom,
         modifier = Modifier.padding(horizontal = 8.dp),
@@ -59,7 +66,7 @@ private fun Cell(value: Int, unit: String) {
         )
         Text(
             unit,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier
                 .alignByBaseline(),
         )

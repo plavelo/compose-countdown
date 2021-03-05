@@ -42,7 +42,11 @@ import org.plavelo.countdown.R
 
 @Preview
 @Composable
-fun Keypad(onTap: (Int) -> Unit = {}, onBackspace: () -> Unit = {}) {
+fun Keypad(
+    enabled: Boolean = true,
+    onTap: (Int) -> Unit = {},
+    onBackspace: () -> Unit = {},
+) {
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
     ) {
@@ -50,25 +54,25 @@ fun Keypad(onTap: (Int) -> Unit = {}, onBackspace: () -> Unit = {}) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Key(1, onTap = onTap)
-            Key(2, onTap = onTap)
-            Key(3, onTap = onTap)
+            Key(1, enabled, onTap = onTap)
+            Key(2, enabled, onTap = onTap)
+            Key(3, enabled, onTap = onTap)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Key(4, onTap = onTap)
-            Key(5, onTap = onTap)
-            Key(6, onTap = onTap)
+            Key(4, enabled, onTap = onTap)
+            Key(5, enabled, onTap = onTap)
+            Key(6, enabled, onTap = onTap)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Key(7, onTap = onTap)
-            Key(8, onTap = onTap)
-            Key(9, onTap = onTap)
+            Key(7, enabled, onTap = onTap)
+            Key(8, enabled, onTap = onTap)
+            Key(9, enabled, onTap = onTap)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -76,7 +80,7 @@ fun Keypad(onTap: (Int) -> Unit = {}, onBackspace: () -> Unit = {}) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Spacer(modifier = Modifier.width(96.dp))
-            Key(0, onTap = onTap)
+            Key(0, enabled, onTap = onTap)
             Icon(
                 Icons.Default.Backspace,
                 contentDescription = stringResource(R.string.icon_backspace),
@@ -85,6 +89,7 @@ fun Keypad(onTap: (Int) -> Unit = {}, onBackspace: () -> Unit = {}) {
                     .padding(vertical = 16.dp)
                     .clickable(
                         onClick = onBackspace,
+                        enabled = enabled,
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = false, radius = 64.dp),
                     ),
@@ -94,12 +99,18 @@ fun Keypad(onTap: (Int) -> Unit = {}, onBackspace: () -> Unit = {}) {
 }
 
 @Composable
-private fun Key(number: Int, modifier: Modifier = Modifier, onTap: (Int) -> Unit = {}) {
+private fun Key(
+    number: Int,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
+    onTap: (Int) -> Unit = {},
+) {
     Box(
         modifier = modifier
             .width(80.dp)
             .clickable(
-                onClick = { onTap(1) },
+                onClick = { onTap(number) },
+                enabled = enabled,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple(bounded = false, radius = 64.dp),
             )

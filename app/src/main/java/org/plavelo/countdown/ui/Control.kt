@@ -44,7 +44,7 @@ fun Control(
     onTapFab: () -> Unit = {},
     onReset: () -> Unit = {},
     isStarted: Boolean = false,
-    resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors()
+    resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors(),
 ) {
     Row(
         modifier = modifier
