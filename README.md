@@ -7,12 +7,13 @@
 
 ## :scroll: Description
 <!--- Describe your app in one or two sentences -->
+This repository is for the second week of the [#AndroidDevChallenge](https://android-developers.googleblog.com/2021/03/android-dev-challenge-2.html).
 
 
 ## :bulb: Motivation and Context
 <!--- Optionally point readers to interesting parts of your submission. -->
 <!--- What are you especially proud of? -->
-
+Create a working, single screen countdown timer.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->

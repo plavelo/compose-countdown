@@ -46,7 +46,7 @@ class MyViewModel : ViewModel() {
     private val _angle = MutableLiveData(0f)
     val angle: LiveData<Float> = _angle
 
-    private var _timer = timer(period = 10) {}
+    private var _timer = timer(period = 1000) {}
 
     private var _startTime: Long = 0
     private var _totalTime: Long = 0
@@ -131,7 +131,7 @@ class MyViewModel : ViewModel() {
     }
 
     private fun generateTimer() {
-        _timer = timer(period = 10) {
+        _timer = timer(period = 15) {
             _elapsedTime = System.currentTimeMillis() - _startTime
             val remainingTime = _totalTime - _elapsedTime
             if (remainingTime > 0) {
