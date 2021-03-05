@@ -107,6 +107,7 @@ fun MyApp() {
                     Divider(modifier = Modifier.padding(horizontal = 16.dp))
                     Keypad(onTap = {}, onBackspace = {})
                     Control(
+                        modifier = Modifier.padding(top = 16.dp, bottom = 32.dp),
                         onTapFab = {},
                         onReset = {},
                         isStarted = false,
@@ -118,12 +119,13 @@ fun MyApp() {
                 Column {
                     Box(
                         contentAlignment = Alignment.Center,
-                        modifier = Modifier.padding(top = 72.dp, bottom = 16.dp),
+                        modifier = Modifier.padding(top = 48.dp),
                     ) {
-                        Indicator(angle = 45f)
+                        Indicator(angle = 225f)
                         Cat(motion = Motion.Jump)
                     }
                     Control(
+                        modifier = Modifier.padding(top = 48.dp),
                         onTapFab = {},
                         onReset = {},
                         isStarted = false,

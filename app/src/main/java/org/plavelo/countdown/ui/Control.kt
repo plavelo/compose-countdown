@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
@@ -41,14 +40,14 @@ import org.plavelo.countdown.R
 @Preview
 @Composable
 fun Control(
+    modifier: Modifier = Modifier,
     onTapFab: () -> Unit = {},
     onReset: () -> Unit = {},
     isStarted: Boolean = false,
     resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors()
 ) {
     Row(
-        modifier = Modifier
-            .padding(32.dp)
+        modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
