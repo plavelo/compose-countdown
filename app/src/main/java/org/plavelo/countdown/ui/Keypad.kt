@@ -16,7 +16,9 @@
 package org.plavelo.countdown.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +30,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Backspace
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -38,82 +42,84 @@ import org.plavelo.countdown.R
 
 @Preview
 @Composable
-fun Keypad(onTap: (Int) -> Unit = {}, onBackspace: () -> Unit = {}) {
+fun Keypad(
+    enabled: Boolean = true,
+    onTap: (Int) -> Unit = {},
+    onBackspace: () -> Unit = {},
+) {
     Column(
-        modifier = Modifier.padding(top = 32.dp),
+        modifier = Modifier.padding(horizontal = 32.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Text(
-                "1",
-                style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(1) }),
-            )
-            Text(
-                "2", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(2) }),
-            )
-            Text(
-                "3", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(3) }),
-            )
+            Key(1, enabled, onTap = onTap)
+            Key(2, enabled, onTap = onTap)
+            Key(3, enabled, onTap = onTap)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Text(
-                "4", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(4) }),
-            )
-            Text(
-                "5", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(5) }),
-            )
-            Text(
-                "6", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(6) }),
-            )
+            Key(4, enabled, onTap = onTap)
+            Key(5, enabled, onTap = onTap)
+            Key(6, enabled, onTap = onTap)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Text(
-                "7", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(7) }),
-            )
-            Text(
-                "8", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(8) }),
-            )
-            Text(
-                "9", style = MaterialTheme.typography.h3,
-                modifier = Modifier.clickable(onClick = { onTap(9) }),
-            )
+            Key(7, enabled, onTap = onTap)
+            Key(8, enabled, onTap = onTap)
+            Key(9, enabled, onTap = onTap)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Spacer(modifier = Modifier.width(32.dp))
-            Text(
-                "0", style = MaterialTheme.typography.h3,
-                modifier = Modifier
-                    .clickable(onClick = { onTap(0) })
-                    .width(32.dp),
-            )
+            Spacer(modifier = Modifier.width(96.dp))
+            Key(0, enabled, onTap = onTap)
             Icon(
                 Icons.Default.Backspace,
                 contentDescription = stringResource(R.string.icon_backspace),
                 modifier = Modifier
-                    .clickable(onClick = onBackspace)
-                    .width(32.dp)
-                    .padding(top = 8.dp),
+                    .width(96.dp)
+                    .padding(vertical = 16.dp)
+                    .clickable(
+                        onClick = onBackspace,
+                        enabled = enabled,
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(bounded = false, radius = 64.dp),
+                    ),
             )
         }
+    }
+}
+
+@Composable
+private fun Key(
+    number: Int,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
+    onTap: (Int) -> Unit = {},
+) {
+    Box(
+        modifier = modifier
+            .width(80.dp)
+            .clickable(
+                onClick = { onTap(number) },
+                enabled = enabled,
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple(bounded = false, radius = 64.dp),
+            )
+            .padding(vertical = 4.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            number.toString(),
+            style = MaterialTheme.typography.h3,
+        )
     }
 }
