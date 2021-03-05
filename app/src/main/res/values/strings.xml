@@ -12,4 +12,9 @@
     <string name="app_name">Countdown</string>
     <string name="about">🐱 Countdown / developed by plavelo</string>
     <string name="reset">Reset</string>
+    <string name="icon_backspace">Backspace</string>
+    <string name="icon_about">About this app</string>
+    <string name="icon_menu">Open the keypad</string>
+    <string name="icon_close">Close the keypad</string>
+    <string name="icon_play">Start or stop the timer</string>
 </resources>

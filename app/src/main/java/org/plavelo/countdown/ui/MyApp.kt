@@ -15,6 +15,7 @@
  */
 package org.plavelo.countdown.ui
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -58,19 +59,21 @@ fun MyApp() {
                 TopAppBar(
                     title = { Text(stringResource(R.string.app_name)) },
                     navigationIcon = {
-                        if (scaffoldState.isConcealed) {
-                            IconButton(onClick = { scope.launch { scaffoldState.reveal() } }) {
-                                Icon(
-                                    Icons.Default.Menu,
-                                    contentDescription = "Localized description"
-                                )
-                            }
-                        } else {
-                            IconButton(onClick = { scope.launch { scaffoldState.conceal() } }) {
-                                Icon(
-                                    Icons.Default.Close,
-                                    contentDescription = "Localized description"
-                                )
+                        Crossfade(targetState = scaffoldState.isConcealed) { isConcealed ->
+                            if (isConcealed) {
+                                IconButton(onClick = { scope.launch { scaffoldState.reveal() } }) {
+                                    Icon(
+                                        Icons.Default.Menu,
+                                        contentDescription = stringResource(R.string.icon_menu),
+                                    )
+                                }
+                            } else {
+                                IconButton(onClick = { scope.launch { scaffoldState.conceal() } }) {
+                                    Icon(
+                                        Icons.Default.Close,
+                                        contentDescription = stringResource(R.string.icon_close),
+                                    )
+                                }
                             }
                         }
                     },
@@ -86,32 +89,45 @@ fun MyApp() {
                         ) {
                             Icon(
                                 Icons.Default.Info,
-                                contentDescription = "Localized description"
+                                contentDescription = stringResource(R.string.about),
                             )
                         }
                     },
                     elevation = 0.dp,
-                    backgroundColor = Color.Transparent
+                    backgroundColor = Color.Transparent,
                 )
             },
             backLayerContent = {
                 Column {
-                    Display()
-                    Divider()
-                    Keypad()
-                    Control(resetButtonColors = ButtonDefaults.buttonColors())
+                    Display(
+                        hours = 0,
+                        minutes = 0,
+                        seconds = 0,
+                    )
+                    Divider(modifier = Modifier.padding(horizontal = 16.dp))
+                    Keypad(onTap = {}, onBackspace = {})
+                    Control(
+                        onTapFab = {},
+                        onReset = {},
+                        isStarted = false,
+                        resetButtonColors = ButtonDefaults.buttonColors(),
+                    )
                 }
             },
             frontLayerContent = {
                 Column {
                     Box(
                         contentAlignment = Alignment.Center,
-                        modifier = Modifier.padding(top = 72.dp, bottom = 16.dp)
+                        modifier = Modifier.padding(top = 72.dp, bottom = 16.dp),
                     ) {
-                        Indicator()
+                        Indicator(angle = 45f)
                         Cat(motion = Motion.Jump)
                     }
-                    Control()
+                    Control(
+                        onTapFab = {},
+                        onReset = {},
+                        isStarted = false,
+                    )
                 }
             }
         )

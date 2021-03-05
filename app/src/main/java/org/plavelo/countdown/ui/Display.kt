@@ -28,36 +28,40 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-val TIMER_LABEL_HEIGHT = 144.dp
+val TIMER_LABEL_HEIGHT = 160.dp
 
 @Preview
 @Composable
-fun Display() {
+fun Display(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) {
     Row(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(top = 24.dp, bottom = 8.dp)
             .height(128.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
     ) {
-        Cell("h")
-        Cell("m")
-        Cell("s")
+        Cell(hours, "h")
+        Cell(minutes, "m")
+        Cell(seconds, "s")
     }
 }
 
 @Composable
-fun Cell(unit: String) {
+private fun Cell(value: Int, unit: String) {
     Row(
         verticalAlignment = Alignment.Bottom,
         modifier = Modifier.padding(horizontal = 8.dp),
     ) {
-        Text("00", style = MaterialTheme.typography.h2, modifier = Modifier.alignByBaseline())
+        Text(
+            value.toString().padStart(2, '0'),
+            style = MaterialTheme.typography.h2,
+            modifier = Modifier.alignByBaseline()
+        )
         Text(
             unit,
             style = MaterialTheme.typography.body1,
             modifier = Modifier
-                .alignByBaseline()
+                .alignByBaseline(),
         )
     }
 }

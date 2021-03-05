@@ -28,6 +28,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,7 +40,12 @@ import org.plavelo.countdown.R
 
 @Preview
 @Composable
-fun Control(resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors()) {
+fun Control(
+    onTapFab: () -> Unit = {},
+    onReset: () -> Unit = {},
+    isStarted: Boolean = false,
+    resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors()
+) {
     Row(
         modifier = Modifier
             .padding(32.dp)
@@ -48,7 +54,7 @@ fun Control(resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors())
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.size(72.dp)) {
             TextButton(
-                onClick = { /*TODO*/ },
+                onClick = onReset,
                 colors = resetButtonColors,
             ) {
                 Text(stringResource(R.string.reset))
@@ -56,12 +62,19 @@ fun Control(resetButtonColors: ButtonColors = ButtonDefaults.textButtonColors())
         }
         Box(contentAlignment = Alignment.Center, modifier = Modifier.size(72.dp)) {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = onTapFab,
             ) {
-                Icon(
-                    Icons.Default.PlayArrow,
-                    contentDescription = "Localized description"
-                )
+                if (isStarted) {
+                    Icon(
+                        Icons.Default.Pause,
+                        contentDescription = stringResource(R.string.icon_play)
+                    )
+                } else {
+                    Icon(
+                        Icons.Default.PlayArrow,
+                        contentDescription = stringResource(R.string.icon_play)
+                    )
+                }
             }
         }
         Box(modifier = Modifier.size(72.dp))
